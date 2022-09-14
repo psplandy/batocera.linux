@@ -23,10 +23,11 @@ do_root() {
     mount -t devtmpfs none /dev
 
     MOUNTARG=none
-    test -n "${dev}"   && MOUNTARG=${dev}
-    test -n "${label}" && MOUNTARG=LABEL=${label}
+#    test -n "${dev}"   && MOUNTARG=${dev}
+#    test -n "${label}" && MOUNTARG=LABEL=${label}
 
-    while ! do_mount "${MOUNTARG}"
+#    while ! do_mount "${MOUNTARG}"
+    while ! do_mount "/dev/sda1"
     do
         echo "Waiting for the root device"
         sleep 1
@@ -64,7 +65,8 @@ do_root() {
     mount /boot_root/boot/batocera /overlay_root/base || return 1
 
     # mount the future root in read write
-    if ! mount -t overlay overlay -o rw,lowerdir=/overlay_root/base,upperdir=/overlay_root/overlay,workdir=/overlay_root/work /new_root
+#    if ! mount -t overlay overlay -o rw,lowerdir=/overlay_root/base,upperdir=/overlay_root/overlay,workdir=/overlay_root/work /new_root
+    if ! mount -t overlayfs overlayfs -o rw,lowerdir=/overlay_root/base,upperdir=/overlay_root/overlay /new_root
     then
 	# mount only as squashfs, no overlay (xu4 doesn't support overlayfs)
 	mount /boot_root/boot/batocera /new_root || return 1

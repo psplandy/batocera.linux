@@ -1,0 +1,30 @@
+#!/bin/bash
+
+ACTION=$1
+PARAM=$2
+INTERNALCARD=$(cat /boot/boot/batocera.board)
+
+if test "${ACTION}" = "setOutput"
+then
+        # force no hdmi if it is unplugged
+        HDMISTATUS=$(cat /sys/devices/virtual/switch/hdmi/state)
+
+        if test "${HDMISTATUS}" = 1
+        then
+  #          curl http://localhost:1234/quit?confirm=switchscreen
+            # force 0 which is supposed to be the internal device
+	    echo 1 > /sys/class/disp/disp/attr/lcd_para 
+	    echo 1 > /sys/class/lcd/reload_lcd_panel_func 
+	    echo 0 > /sys/class/disp/disp/attr/lcd 
+	    echo 1 > /sys/class/disp/disp/attr/lcd
+
+        else
+ #               curl http://localhost:1234/quit # No confirmation when unplugging HDMI 
+		echo 0 > /sys/class/disp/disp/attr/lcd_para 
+		echo 1 > /sys/class/lcd/reload_lcd_panel_func 
+		echo 0 > /sys/class/disp/disp/attr/lcd 
+		echo 1 > /sys/class/disp/disp/attr/lcd
+
+        fi
+fi
+
