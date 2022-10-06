@@ -29,6 +29,10 @@ ifeq ($(BR2_PACKAGE_MALI_G31_GBM),y)
   BATOCERA_SCRIPT_RESOLUTION_TYPE=basic
 endif
 
+ifeq ($(BR2_PACKAGE_LIBMALI),y)
+  BATOCERA_SCRIPT_RESOLUTION_TYPE=basic
+endif
+
 define BATOCERA_SCRIPTS_INSTALL_TARGET_CMDS
 	install -m 0755 $(BR2_EXTERNAL_BATOCERA_PATH)/package/batocera/core/batocera-scripts/scripts/bluetooth/bluezutils.py            $(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/ # any variable ?
 	install -m 0755 $(BR2_EXTERNAL_BATOCERA_PATH)/package/batocera/core/batocera-scripts/scripts/bluetooth/batocera-bluetooth       $(TARGET_DIR)/usr/bin/
@@ -80,6 +84,14 @@ endef
 
 ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_RK3128),y)
   BATOCERA_SCRIPTS_POST_INSTALL_TARGET_HOOKS += BATOCERA_SCRIPTS_INSTALL_RK3128
+endif
+
+define BATOCERA_SCRIPTS_INSTALL_ACM
+        install -m 0755 $(BR2_EXTERNAL_BATOCERA_PATH)/package/batocera/core/batocera-scripts/scripts/batocera-resolution-post-acm $(TARGET_DIR)/usr/bin/batocera-resolution-post
+endef
+
+ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16),y)
+  BATOCERA_SCRIPTS_POST_INSTALL_TARGET_HOOKS += BATOCERA_SCRIPTS_INSTALL_ACM
 endif
 
 define BATOCERA_SCRIPTS_INSTALL_XORG

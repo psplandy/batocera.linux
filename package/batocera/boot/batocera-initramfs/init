@@ -27,7 +27,7 @@ do_root() {
 #    test -n "${label}" && MOUNTARG=LABEL=${label}
 
 #    while ! do_mount "${MOUNTARG}"
-    while ! do_mount "/dev/sda1"
+    while ! do_mount "/dev/mmcblk0p1"
     do
         echo "Waiting for the root device"
         sleep 1

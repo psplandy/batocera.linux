@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cat /dev/zero > /dev/fb0 
+
+echo 0 > /sys/class/disp/disp/attr/lcd_para
+echo 1 > /sys/class/lcd/reload_lcd_panel_func
+echo 0 > /sys/class/disp/disp/attr/lcd
+echo 1 > /sys/class/disp/disp/attr/lcd
+
+#fbset -g 480 800 480 1600 32
+fbset -g 768 1024 768 2048 32
+
