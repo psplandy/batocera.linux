@@ -185,9 +185,7 @@ class MameGenerator(Generator):
             commandArray += [ "-modesetting" ]
             commandArray += [ "-readconfig" ]
         else:
-            commandArray += [ "-nomodeline_generation" ]
-            commandArray += [ "-nochangeres" ]
-            commandArray += [ "-noswitchres" ]
+            commandArray += [ "-resolution", "{}x{}".format(gameResolution["width"], gameResolution["height"]) ]
 
         # Refresh rate options to help with screen tearing
         # syncrefresh is unlisted, it requires specific display timings and 99.9% of users will get unplayable games.
@@ -224,14 +222,42 @@ class MameGenerator(Generator):
         if len(pluginsToLoad) > 0:
             commandArray += [ "-plugins", "-plugin", ",".join(pluginsToLoad) ]
 
+        # Mouse
+        useMouse = False
+        if (system.isOptSet('use_mouse') and system.getOptBoolean('use_mouse')) or not (messSysName[messMode] == "" or messMode == -1):
+            useMouse = True
+            commandArray += [ "-dial_device", "mouse" ]
+            commandArray += [ "-trackball_device", "mouse" ]
+            commandArray += [ "-paddle_device", "mouse" ]
+            commandArray += [ "-positional_device", "mouse" ]
+            commandArray += [ "-mouse_device", "mouse" ]
+            commandArray += [ "-ui_mouse" ]
+            if not (system.isOptSet('use_guns') and system.getOptBoolean('use_guns')):
+                commandArray += [ "-lightgun_device", "mouse" ]
+                commandArray += [ "-adstick_device", "mouse" ]
+        else:
+            commandArray += [ "-dial_device", "joystick" ]
+            commandArray += [ "-trackball_device", "joystick" ]
+            commandArray += [ "-paddle_device", "joystick" ]
+            commandArray += [ "-positional_device", "joystick" ]
+            commandArray += [ "-mouse_device", "joystick" ]
+            if not (system.isOptSet('use_guns') and system.getOptBoolean('use_guns')):
+                commandArray += [ "-lightgun_device", "joystick" ]
+                commandArray += [ "-adstick_device", "joystick" ]
+        # Multimouse option currently hidden in ES, SDL only detects one mouse.
+        # Leaving code intact for testing & possible ManyMouse integration
+        multiMouse = False
+        if system.isOptSet('multimouse') and system.getOptBoolean('multimouse'):
+            multiMouse = True
+            commandArray += [ "-multimouse" ]
+
         # guns
+        useGuns = False
         if system.isOptSet('use_guns') and system.getOptBoolean('use_guns'):
+            useGuns = True
             commandArray += [ "-lightgunprovider", "udev" ]
             commandArray += [ "-lightgun_device", "lightgun" ]
             commandArray += [ "-adstick_device", "lightgun" ]
-        else:
-            commandArray += [ "-lightgunprovider", "auto" ]
-            commandArray += [ "-lightgun_device", "mouse" ]
         if system.isOptSet('offscreenreload') and system.getOptBoolean('offscreenreload'):
             commandArray += [ "-offscreen_reload" ]
 
@@ -434,9 +460,9 @@ class MameGenerator(Generator):
         buttonLayout = getMameControlScheme(system, romBasename)
 
         if messMode == -1:
-            mameControllers.generatePadsConfig(cfgPath, playersControllers, "", buttonLayout, customCfg, specialController, bezelSet)
+            mameControllers.generatePadsConfig(cfgPath, playersControllers, "", buttonLayout, customCfg, specialController, bezelSet, useGuns, useMouse, multiMouse)
         else:
-            mameControllers.generatePadsConfig(cfgPath, playersControllers, messModel, buttonLayout, customCfg, specialController, bezelSet)
+            mameControllers.generatePadsConfig(cfgPath, playersControllers, messModel, buttonLayout, customCfg, specialController, bezelSet, useGuns, useMouse, multiMouse)
 
         # Change directory to MAME folder (allows data plugin to load properly)
         os.chdir('/usr/bin/mame')

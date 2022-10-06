@@ -5,7 +5,6 @@ import batoceraFiles
 from generators.Generator import Generator
 import shutil
 import os
-from . import daphneControllers
 import controllersConfig
 
 class DaphneGenerator(Generator):
@@ -14,9 +13,6 @@ class DaphneGenerator(Generator):
     def generate(self, system, rom, playersControllers, guns, gameResolution):
         if not os.path.exists(os.path.dirname(batoceraFiles.daphneConfig)):
             os.makedirs(os.path.dirname(batoceraFiles.daphneConfig))
-
-        # controllers
-        daphneControllers.generateControllerConfig(batoceraFiles.daphneConfig, playersControllers)
 
         # extension used .daphne and the file to start the game is in the folder .daphne with the extension .txt
         romName = os.path.splitext(os.path.basename(rom))[0]
@@ -117,7 +113,12 @@ class DaphneGenerator(Generator):
         if os.path.isfile(commandsFile):
             commandArray.extend(open(commandsFile,'r').read().split())
 
-        return Command.Command(array=commandArray)
+        # We now use SDL controller config
+        return Command.Command(
+            array=commandArray,
+            env={
+                'SDL_GAMECONTROLLERCONFIG': controllersConfig.generateSdlGameControllerConfig(playersControllers)
+            })
 
     def getInGameRatio(self, config, gameResolution, rom):
         romName = os.path.splitext(os.path.basename(rom))[0]        

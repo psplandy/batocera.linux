@@ -15,7 +15,7 @@ msgstr ""
 
 #. TRANSLATION: shared
 msgctxt "game_options"
-msgid "Force the emulator to run at this resolution."
+msgid "Set the display's resolution. Does not affect the rendering resolution."
 msgstr ""
 
 #. TRANSLATION: shared, mame
@@ -359,6 +359,21 @@ msgctxt "game_options"
 msgid "RUMBLE LEVEL"
 msgstr ""
 
+#. TRANSLATION: shared
+msgctxt "game_options"
+msgid "Set game audio level gain in dB."
+msgstr ""
+
+#. TRANSLATION: shared
+msgctxt "game_options"
+msgid "AUDIO VOLUME GAIN"
+msgstr ""
+
+#. TRANSLATION: shared
+msgctxt "game_options"
+msgid "0 (No gain)"
+msgstr ""
+
 #. TRANSLATION: libretro/81
 msgctxt "game_options"
 msgid "Emulate Chroma 81 interface (colorization)."
@@ -479,6 +494,22 @@ msgstr ""
 msgctxt "game_options"
 msgid "Disabled"
 msgstr "Uitgeschakeld"
+
+#. TRANSLATION: libretro/bluemsx, libretro/fuse, libretro/vice_x64, libretro/vice_x64sc, libretro/vice_x128, ...
+msgctxt "game_options"
+msgid "Hides borders on many games. Some games used the borders."
+msgstr ""
+"Verbergt randen voor veel spellen. Sommige spellen gebruiken de randen."
+
+#. TRANSLATION: libretro/bluemsx, libretro/fuse, vice
+msgctxt "game_options"
+msgid "ZOOM (HIDE BORDERS)"
+msgstr "ZOOM (RANDEN VERBERGEN)"
+
+#. TRANSLATION: libretro/bluemsx
+msgctxt "game_options"
+msgid "MSX2"
+msgstr ""
 
 #. TRANSLATION: libretro/bluemsx
 msgctxt "game_options"
@@ -1763,12 +1794,12 @@ msgctxt "game_options"
 msgid "Enhancement. Remove the eight sprites per line limit."
 msgstr "Uitbreiding. Verwijder de acht sprites per lijn limiet."
 
-#. TRANSLATION: libretro/fceumm, libretro/flycast, libretro/flycast, libretro/nestopia, melonds, ...
+#. TRANSLATION: libretro/fceumm, libretro/flycast, libretro/flycast, libretro/nestopia, drastic
 msgctxt "game_options"
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-#. TRANSLATION: libretro/fceumm, libretro/flycast, libretro/flycast, libretro/nestopia, melonds, ...
+#. TRANSLATION: libretro/fceumm, libretro/flycast, libretro/flycast, libretro/nestopia, drastic
 msgctxt "game_options"
 msgid "Vertical"
 msgstr "Verticaal"
@@ -2090,17 +2121,6 @@ msgstr ""
 msgctxt "game_options"
 msgid "Scorpion 256K"
 msgstr ""
-
-#. TRANSLATION: libretro/fuse, libretro/vice_x64, libretro/vice_x64sc, libretro/vice_x128, libretro/vice_xplus4, ...
-msgctxt "game_options"
-msgid "Hides borders on many games. Some games used the borders."
-msgstr ""
-"Verbergt randen voor veel spellen. Sommige spellen gebruiken de randen."
-
-#. TRANSLATION: libretro/fuse, vice
-msgctxt "game_options"
-msgid "ZOOM (HIDE BORDERS)"
-msgstr "ZOOM (RANDEN VERBERGEN)"
 
 #. TRANSLATION: libretro/fuse
 msgctxt "game_options"
@@ -2577,7 +2597,7 @@ msgctxt "game_options"
 msgid "SHARE MAME ARTWORK"
 msgstr ""
 
-#. TRANSLATION: libretro/mame, libretro/mame, libretro/mamevirtual, libretro/xrick, melonds
+#. TRANSLATION: libretro/mame, libretro/mame, libretro/mamevirtual, libretro/xrick
 msgctxt "game_options"
 msgid "On (Default)"
 msgstr ""
@@ -4418,7 +4438,7 @@ msgctxt "game_options"
 msgid "4.5x (1440x1080)"
 msgstr ""
 
-#. TRANSLATION: libretro/parallel_n64, libretro/tyrquake, amiberry, ppsspp, rpcs3, ...
+#. TRANSLATION: libretro/parallel_n64, libretro/tyrquake, amiberry, melonds, ppsspp, ...
 msgctxt "game_options"
 msgid "Automatic"
 msgstr "Automatisch"
@@ -6354,7 +6374,7 @@ msgctxt "game_options"
 msgid "Force 4:3"
 msgstr "Forceer 4:3"
 
-#. TRANSLATION: daphne, melonds
+#. TRANSLATION: daphne
 msgctxt "game_options"
 msgid "Rotate the screen with the emulator."
 msgstr ""
@@ -6364,7 +6384,7 @@ msgctxt "game_options"
 msgid "SCREEN ROTATION"
 msgstr ""
 
-#. TRANSLATION: daphne
+#. TRANSLATION: daphne, melonds
 msgctxt "game_options"
 msgid "0 degrees"
 msgstr ""
@@ -6619,7 +6639,7 @@ msgctxt "game_options"
 msgid "USE PAD PROFILES"
 msgstr "GEBRUIK CONTROLLER PROFIELEN"
 
-#. TRANSLATION: dolphin, dolphin_triforce, pcsx2, ppsspp
+#. TRANSLATION: dolphin, dolphin_triforce, pcsx2, ppsspp, vita3k
 msgctxt "game_options"
 msgid "Improves clarity of distant textures."
 msgstr "Verbeterd helderheid van verre textures."
@@ -6761,12 +6781,7 @@ msgstr ""
 
 #. TRANSLATION: dolphin_triforce
 msgctxt "game_options"
-msgid "Disable status messages displayed by the emulator."
-msgstr ""
-
-#. TRANSLATION: dolphin_triforce
-msgctxt "game_options"
-msgid "DISABLE OSD MESSAGES"
+msgid "DISABLE ON-SCREEN DISPLAY MESSAGES"
 msgstr ""
 
 #. TRANSLATION: duckstation
@@ -6809,14 +6824,9 @@ msgctxt "game_options"
 msgid "Per 1s, 120s total (1320MB|240MB)"
 msgstr "Per 1s, 120s totaal (1320MB|240MB)"
 
-#. TRANSLATION: duckstation
+#. TRANSLATION: duckstation, melonds
 msgctxt "game_options"
-msgid "Choose whether to show on the display, configuration messages."
-msgstr ""
-
-#. TRANSLATION: duckstation
-msgctxt "game_options"
-msgid "SHOW OSD MESSAGES"
+msgid "SHOW ON-SCREEN DISPLAY MESSAGES"
 msgstr ""
 
 #. TRANSLATION: duckstation
@@ -7242,32 +7252,22 @@ msgstr "4M"
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Choose whether or not to limit the framerate."
-msgstr ""
-
-#. TRANSLATION: melonds
-msgctxt "game_options"
 msgid "LIMIT FRAME RATE"
 msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "No Limitation"
+msgid "No Limit"
 msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Standard (Default)"
+msgid "As game specifies"
 msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Enhancement. Increase the rendering resolution."
-msgstr ""
-
-#. TRANSLATION: melonds
-msgctxt "game_options"
-msgid "Enables improved polygon splitting."
+msgid "Enhancement. Enables improved polygon splitting."
 msgstr ""
 
 #. TRANSLATION: melonds
@@ -7277,12 +7277,12 @@ msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "0 degrees (Default)"
+msgid "Rotates the screens, to simulate holding the DS sideways."
 msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Swap the Nintendo DS Displays."
+msgid "Swap the position of the dual displays."
 msgstr ""
 
 #. TRANSLATION: melonds
@@ -7292,7 +7292,7 @@ msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Choose the screen size."
+msgid "Sets the window size to an integer size."
 msgstr ""
 
 #. TRANSLATION: melonds
@@ -7302,17 +7302,22 @@ msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "1x (Default)"
+msgid "Adjusts the positions of the screens."
 msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Choose the preferred screen layout."
+msgid "Original screen positions"
 msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Natural (Default)"
+msgid "Always enforce vertical"
+msgstr ""
+
+#. TRANSLATION: melonds
+msgctxt "game_options"
+msgid "Always enforce horizontal"
 msgstr ""
 
 #. TRANSLATION: melonds
@@ -7322,7 +7327,7 @@ msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Choose the NDS screen sizings."
+msgid "How the window space is distributed between the screens."
 msgstr ""
 
 #. TRANSLATION: melonds
@@ -7332,7 +7337,7 @@ msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Even (Default)"
+msgid "Even"
 msgstr ""
 
 #. TRANSLATION: melonds
@@ -7342,12 +7347,7 @@ msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Emphasize botton"
-msgstr ""
-
-#. TRANSLATION: melonds
-msgctxt "game_options"
-msgid "Auto"
+msgid "Emphasize bottom"
 msgstr ""
 
 #. TRANSLATION: melonds
@@ -7362,32 +7362,7 @@ msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "Force integer scaling for pixels on larger displays."
-msgstr ""
-
-#. TRANSLATION: melonds
-msgctxt "game_options"
 msgid "INTEGER SCALING"
-msgstr ""
-
-#. TRANSLATION: melonds
-msgctxt "game_options"
-msgid "Enable cheats for MelonDS."
-msgstr ""
-
-#. TRANSLATION: melonds
-msgctxt "game_options"
-msgid "Enable the on screen display."
-msgstr ""
-
-#. TRANSLATION: melonds
-msgctxt "game_options"
-msgid "ENABLE OSD"
-msgstr ""
-
-#. TRANSLATION: melonds
-msgctxt "game_options"
-msgid "Choose console type."
 msgstr ""
 
 #. TRANSLATION: melonds
@@ -7397,12 +7372,12 @@ msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "DS (default)"
+msgid "DS"
 msgstr ""
 
 #. TRANSLATION: melonds
 msgctxt "game_options"
-msgid "DSi (Experiemental)"
+msgid "DSi (experiemental)"
 msgstr ""
 
 #. TRANSLATION: moonlight
@@ -8604,6 +8579,18 @@ msgctxt "game_options"
 msgid "Enable or disable high score saving"
 msgstr ""
 
+#. TRANSLATION: mame/uzem
+msgctxt "game_options"
+msgid ""
+"Enable mouse input for trackballs, spinners, lightguns (if no gun "
+"connected), and similar controls"
+msgstr ""
+
+#. TRANSLATION: mame/uzem, wine
+msgctxt "game_options"
+msgid "ENABLE MOUSE"
+msgstr "MUIS INSCHAKELEN"
+
 #. TRANSLATION: mame
 msgctxt "game_options"
 msgid "BGFX for post-processing, accel/opengl for raw image."
@@ -8794,11 +8781,6 @@ msgstr "VIRTUELE DESKTOP"
 msgctxt "game_options"
 msgid "Force mouse in games."
 msgstr "Forceer muis in spellen."
-
-#. TRANSLATION: wine
-msgctxt "game_options"
-msgid "ENABLE MOUSE"
-msgstr "MUIS INSCHAKELEN"
 
 #. TRANSLATION: wine
 msgctxt "game_options"
@@ -9017,7 +8999,7 @@ msgctxt "game_options"
 msgid "Chinese"
 msgstr "Chinees"
 
-#. TRANSLATION: sonic2013, demul
+#. TRANSLATION: sonic2013, demul, vita3k
 msgctxt "game_options"
 msgid "Fix screen tearing."
 msgstr "Fix screen tearing."
@@ -9212,6 +9194,16 @@ msgstr ""
 #. TRANSLATION: eduke32, fury, raze
 msgctxt "game_options"
 msgid "Show (Default)"
+msgstr ""
+
+#. TRANSLATION: vita3k
+msgctxt "game_options"
+msgid "Anti-aliasing is a technique for smoothing out jagged edges."
+msgstr ""
+
+#. TRANSLATION: vita3k
+msgctxt "game_options"
+msgid "FXAA"
 msgstr ""
 
 #~ msgctxt "game_options"
