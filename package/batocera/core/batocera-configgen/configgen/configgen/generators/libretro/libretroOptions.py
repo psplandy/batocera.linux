@@ -1140,7 +1140,10 @@ def generateCoreSettings(coreSettings, system, rom, guns):
         # Enable threaded rendering
         coreSettings.save('melonds_threaded_renderer', '"enabled"')
         # Emulate Stylus on Right Stick
-        coreSettings.save('melonds_touch_mode',        '"Joystick"')
+        if system.isOptSet('melonds_touch_mode'):
+            coreSettings.save('melonds_touch_mode',  '"' + system.config['melonds_touch_mode'] + '"')
+        else:
+            coreSettings.save('melonds_touch_mode','"Joystick"')
         # Boot game directly
         if system.isOptSet('melonds_boot_directly'):
             coreSettings.save('melonds_boot_directly', system.config['melonds_boot_directly'])
@@ -1939,7 +1942,13 @@ def generateCoreSettings(coreSettings, system, rom, guns):
             coreSettings.save('yabasanshiro_multitap_port1', '"disabled"')
             coreSettings.save('yabasanshiro_multitap_port2', '"disabled"')
 
-    # TODO: Add CORE options for Beetle-saturn and Kronos
+    if (system.config['core'] == 'kronos'):
+        # Share saves with Beetle
+        if system.isOptSet('kronos_use_beetle_saves') and system.config['kronos_use_beetle_saves'] == 'disabled':
+            coreSettings.save('kronos_use_beetle_saves', '"disabled"')
+        else:
+            coreSettings.save('kronos_use_beetle_saves', '"enabled"')
+
     # gun cross
     if (system.config['core'] == 'beetle-saturn'):
         if system.isOptSet('beetle-saturn_crosshair'):
