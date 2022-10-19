@@ -158,5 +158,8 @@ mixer $card 'Playback Path' 'SPK'
 mixer $card 'Right Headphone Mixer Right DAC' on
 mixer $card 'Left Headphone Mixer Left DAC' on
 
+# Sunxi/Allwinner R16 Speaker
+mixer $card 'Speaker Function' 'spk'
+
 exit 0
 )&

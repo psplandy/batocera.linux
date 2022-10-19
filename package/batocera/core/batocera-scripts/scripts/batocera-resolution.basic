@@ -5,6 +5,8 @@ FILEMODES="/sys/class/graphics/fb0/modes"
 f_usage() {
 	echo "$0 currentMode" >&2
 	echo "$0 currentResolution" >&2
+	echo "$0 setMode" >&2
+	echo "$0 listModes" >&2
 }
 
 if [ $# -eq 0 ]; then
@@ -17,8 +19,13 @@ shift
 
 case "${ACTION}" in
     "listModes")
+	echo "1024x768"
     ;;
     "setMode")
+	# Internal
+	fbset -g 768 1024 768 2048 32
+	# HDMI
+	# fbset -g 720 1280 720 2560 32
     ;;
     "minTomaxResolution" | "minTomaxResolution-secure")
     ;;

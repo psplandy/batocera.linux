@@ -1,0 +1,6 @@
+config BR2_PACKAGE_E2M_PADDLE_TRACKBALL
+	bool "Taito Egret-II Mini Paddle and Trackball controller support"
+	select BR2_PACKAGE_EVSIEVE
+
+	help
+	  Egret-II Mini Paddle Trackball support

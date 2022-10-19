@@ -62,6 +62,12 @@ if BR2_PACKAGE_BATOCERA_TARGET_S905GEN2 || BR2_PACKAGE_BATOCERA_TARGET_S905GEN3 
 	default y
 endif
 
+if BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16 
+	config BR2_KERNEL_LEGACY_3_4
+	bool "Allwinner/Sunxi R16 requires legacy kernel 3.4"
+	default y
+endif
+
 # add platforms that support GLES2 here
 # the GLES2 backend maps to OpenGL 2.1 on desktop, OpenGL ES 2.0 on mobile and WebGL 1.0 on the web.
 if BR2_PACKAGE_BATOCERA_TARGET_X86_ANY || BR2_PACKAGE_BATOCERA_TARGET_AMLOGIC_GLES2 || BR2_PACKAGE_BATOCERA_TARGET_ROCKCHIP_GLES2 \
@@ -211,7 +217,7 @@ config BR2_PACKAGE_BATOCERA_SYSTEM
 	select BR2_PACKAGE_CA_CERTIFICATES                      # ssl certificates
 	select BR2_PACKAGE_ROCKCHIP_RGA                         if BR2_PACKAGE_BATOCERA_TARGET_RK3326 || BR2_PACKAGE_BATOCERA_TARGET_RG552 || BR2_PACKAGE_BATOCERA_TARGET_RK3128 # Used for screen rotation (SDL, Retroarch, Moonlight)
 
-	select BR2_PACKAGE_LIBDRM                               if !BR2_PACKAGE_BATOCERA_RPI_VCORE
+	select BR2_PACKAGE_LIBDRM                               if !BR2_PACKAGE_BATOCERA_RPI_VCORE && !BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16
     select BR2_PACKAGE_BATOCERA_DRMINFO                     if BR2_PACKAGE_LIBDRM
 	select BR2_PACKAGE_LIRC_TOOLS                           # lirc (remote control)
 	select BR2_PACKAGE_LIBCEC                               # libcec
@@ -291,7 +297,8 @@ config BR2_PACKAGE_BATOCERA_SYSTEM
                                                 !BR2_PACKAGE_BATOCERA_TARGET_CHA            && \
                                                 !BR2_PACKAGE_BATOCERA_TARGET_RK3326         && \
                                                 !BR2_PACKAGE_BATOCERA_TARGET_RK3128         && \
-												!BR2_PACKAGE_BATOCERA_TARGET_ODIN
+                                                !BR2_PACKAGE_BATOCERA_TARGET_ODIN           && \
+                                                !BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16
 	select BR2_PACKAGE_RTL8821AU_MORROWNR    if BR2_PACKAGE_BATOCERA_TARGET_S922X || BR2_PACKAGE_BATOCERA_TARGET_X86_ANY
 
 	select BR2_PACKAGE_RTL8821CU             if BR2_PACKAGE_BATOCERA_TARGET_S922X || BR2_PACKAGE_BATOCERA_TARGET_X86_ANY
@@ -412,7 +419,7 @@ config BR2_TARGET_BATOCERA_IMAGES_DEFINITIONS
 	default "allwinner/h616/orangepi-zero2"                                                   if BR2_PACKAGE_BATOCERA_TARGET_ORANGEPI_ZERO2
 	default "allwinner/h3/orangepi-pc"                                                        if BR2_PACKAGE_BATOCERA_TARGET_ORANGEPI_PC
 	default "allwinner/h3/cha"                                                                if BR2_PACKAGE_BATOCERA_TARGET_CHA
-	default "allwinner/r16/acm allwinner/r16/e2m"                                                               if BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16
+	default "allwinner/r16/acm allwinner/r16/e2m"                                             if BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16
 	default "amlogic/s812"                                                                    if BR2_PACKAGE_BATOCERA_TARGET_S812
 	default "samsung/exynos5422/odroidxu4"                                                    if BR2_PACKAGE_BATOCERA_TARGET_XU4
 	default "x86"                                                                             if BR2_PACKAGE_BATOCERA_TARGET_X86
@@ -501,7 +508,7 @@ config BR2_PACKAGE_BATOCERA_TARGET_CHA
 	bool "cha"
 
 config BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16
-        bool "sunxi_r16"
+	bool "sunxi_r16"
 
 config BR2_PACKAGE_BATOCERA_TARGET_S812
 	bool "s812"
@@ -624,7 +631,7 @@ config BR2_PACKAGE_BATOCERA_HOMEBREW_SYSTEMS
 	select BR2_PACKAGE_LIBRETRO_EASYRPG # libretro core
 
 	# Fantasy consoles
-	select BR2_PACKAGE_LIBRETRO_TIC80    if !BR2_PACKAGE_BATOCERA_TARGET_ORANGEPI_ZERO2 && !BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16
+	select BR2_PACKAGE_LIBRETRO_TIC80    if !BR2_PACKAGE_BATOCERA_TARGET_ORANGEPI_ZERO2
 	select BR2_PACKAGE_LIBRETRO_RETRO8   # ALL
 	select BR2_PACKAGE_LEXALOFFLE_PICO8  # ALL
 
@@ -793,7 +800,7 @@ config BR2_PACKAGE_BATOCERA_MSDOS_SYSTEMS
                                                     !BR2_PACKAGE_BATOCERA_TARGET_RK3128		&& \
                                                     !BR2_PACKAGE_BATOCERA_TARGET_RG552      && \
                                                     !BR2_PACKAGE_BATOCERA_TARGET_CHA        && \
-						    !BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16 # dos
+                                                    !BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16 # dos
 
 	select BR2_PACKAGE_DOSBOX_STAGING           if  !BR2_PACKAGE_BATOCERA_TARGET_BCM2835 && !BR2_PACKAGE_BATOCERA_TARGET_RPIZERO2 && !BR2_PACKAGE_BATOCERA_TARGET_CHA && !BR2_PACKAGE_BATOCERA_TARGET_RK3399 \
 	                                                && !BR2_PACKAGE_BATOCERA_TARGET_RG552 && !BR2_PACKAGE_BATOCERA_TARGET_ORANGEPI_3_LTS && !BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16
@@ -1313,13 +1320,13 @@ config BR2_PACKAGE_BATOCERA_WPA
     bool "batocera.linux WPA supplicant"
 
     select BR2_PACKAGE_WPA_SUPPLICANT                           if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 # wifi
-	select BR2_PACKAGE_WPA_SUPPLICANT_CLI                       if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
-	select BR2_PACKAGE_WPA_SUPPLICANT_DBUS                      if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
-	select BR2_PACKAGE_WPA_SUPPLICANT_DBUS_INTROSPECTION        if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
-	select BR2_PACKAGE_WPA_SUPPLICANT_WIRED                     if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wpa_supplicant driver, 2.10 requires kernel > 4.4
-	select BR2_PACKAGE_WPA_SUPPLICANT_WPA3                      if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
-	select BR2_PACKAGE_WPA_SUPPLICANT_NL80211                   if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wpa_supplicant driver
-	select BR2_PACKAGE_WPA_SUPPLICANT_WEXT                      if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wpa_supplicant driver
+	select BR2_PACKAGE_WPA_SUPPLICANT_CLI                       if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
+	select BR2_PACKAGE_WPA_SUPPLICANT_DBUS                      if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
+	select BR2_PACKAGE_WPA_SUPPLICANT_DBUS_INTROSPECTION        if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
+	select BR2_PACKAGE_WPA_SUPPLICANT_WIRED                     if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wpa_supplicant driver, 2.10 requires kernel > 4.4
+	select BR2_PACKAGE_WPA_SUPPLICANT_WPA3                      if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
+	select BR2_PACKAGE_WPA_SUPPLICANT_NL80211                   if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wpa_supplicant driver
+	select BR2_PACKAGE_WPA_SUPPLICANT_WEXT                      if !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 && !BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wpa_supplicant driver
 	select BR2_PACKAGE_WPA_SUPPLICANT_K44                       if BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 || BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
 	select BR2_PACKAGE_WPA_SUPPLICANT_K44_CLI                   if BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 || BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
 	select BR2_PACKAGE_WPA_SUPPLICANT_K44_DBUS                  if BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4 || BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_4 # wifi
@@ -1403,7 +1410,7 @@ config BR2_PACKAGE_BATOCERA_SDL2
 	select BR2_PACKAGE_SDL2_OPENGLES
 	select BR2_PACKAGE_SDL2_OPENGL      if  BR2_PACKAGE_BATOCERA_TARGET_X86_ANY || BR2_PACKAGE_BATOCERA_SBC_XORG
 	select BR2_PACKAGE_SDL2_X11         if  BR2_PACKAGE_BATOCERA_TARGET_X86_ANY || BR2_PACKAGE_BATOCERA_SBC_XORG
-	select BR2_PACKAGE_SDL2_KMSDRM      if !BR2_PACKAGE_BATOCERA_RPI_VCORE
+	select BR2_PACKAGE_SDL2_KMSDRM      if !BR2_PACKAGE_BATOCERA_RPI_VCORE && !BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16
     select BR2_PACKAGE_SDL2_WAYLAND     if  BR2_PACKAGE_WAYLAND
     select BR2_PACKAGE_SDL2_VULKAN      if  BR2_PACKAGE_BATOCERA_VULKAN
 	select BR2_PACKAGE_FLAC             # flac

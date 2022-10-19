@@ -1,0 +1,5 @@
+config BR2_PACKAGE_UBOOT_SUNXI_R16
+    bool "uboot files for Allwinner/Sunxi R16"
+    select BR2_TOOLCHAIN_OPTIONAL_LINARO_ARM
+    help
+        uboot files for Allwinner/Sunxi R16

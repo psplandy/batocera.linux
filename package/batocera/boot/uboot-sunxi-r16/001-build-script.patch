@@ -1,0 +1,22 @@
+--- a/build.sh	2022-10-19 17:29:43.000000000 +0000
++++ b/build.sh	2022-10-19 18:22:13.524477764 +0000
+@@ -1,9 +1,11 @@
+ #!/bin/bash
+ set -e
+ 
+-PLATFORM="sun6i"
++PLATFORM="sun8iw5p1"
+ MODULE=""
+ TOOLSPATH=`pwd`
++CROSS_COMPILE=/sunxi-r16/host/lib/gcc-linaro-arm-linux-gnueabi/bin/arm-linux-gnueabi-
++
+ show_help()
+ {
+ 	printf "\nbuild.sh - Top level build scritps\n"
+@@ -37,5 +39,4 @@
+ fi
+ 
+ 	export PATH=$PATH:${TOOLSPATH}/../buildroot/output/external-toolchain/bin/
+-	make distclean CROSS_COMPILE=arm-linux-gnueabi- && make -j8 $PLATFORM CROSS_COMPILE=arm-linux-gnueabi-
+-	cp -rf u-boot.bin  ../brandy/out_source
++	make distclean CROSS_COMPILE=${CROSS_COMPILE} && make -j8 $PLATFORM CROSS_COMPILE=${CROSS_COMPILE}

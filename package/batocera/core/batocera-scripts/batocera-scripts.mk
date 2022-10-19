@@ -89,12 +89,12 @@ ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_RK3128),y)
   BATOCERA_SCRIPTS_POST_INSTALL_TARGET_HOOKS += BATOCERA_SCRIPTS_INSTALL_RK3128
 endif
 
-define BATOCERA_SCRIPTS_INSTALL_ACM
-        install -m 0755 $(BR2_EXTERNAL_BATOCERA_PATH)/package/batocera/core/batocera-scripts/scripts/batocera-resolution-post-acm $(TARGET_DIR)/usr/bin/batocera-resolution-post
+define BATOCERA_SCRIPTS_INSTALL_SUNXI_R16
+        install -m 0755 $(BR2_EXTERNAL_BATOCERA_PATH)/package/batocera/core/batocera-scripts/scripts/batocera-resolution-post-sunxi-r16 $(TARGET_DIR)/usr/bin/batocera-resolution-post
 endef
 
 ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_SUNXI_R16),y)
-  BATOCERA_SCRIPTS_POST_INSTALL_TARGET_HOOKS += BATOCERA_SCRIPTS_INSTALL_ACM
+  BATOCERA_SCRIPTS_POST_INSTALL_TARGET_HOOKS += BATOCERA_SCRIPTS_INSTALL_SUNXI_R16
 endif
 
 define BATOCERA_SCRIPTS_INSTALL_XORG
