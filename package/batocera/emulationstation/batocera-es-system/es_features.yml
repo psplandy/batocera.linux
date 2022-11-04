@@ -5845,7 +5845,7 @@ citra:
 
 daphne:
   features: [padtokeyboard]
-  shared: [videomode, bezel, bezel_stretch, hud, hud_corner, bezel.tattoo, bezel.tattoo_corner, bezel.tattoo_file, bezel.resize_tattoo]
+  shared: [videomode, bezel, bezel_stretch, hud, hud_corner, bezel.tattoo, bezel.tattoo_corner, bezel.tattoo_file, bezel.resize_tattoo, use_guns]
   cfeatures:
         gfxbackend:
             archs_include: [x86, x86_64, bcm2711, rk3326]
@@ -5931,6 +5931,13 @@ daphne:
             group: ADVANCED OPTIONS
             prompt:      SDL TEXTUREACCESS STREAMING
             description: Can improve video performance. Do not use with ActionMax games or scanlines.
+            choices:
+                "Off":                          0
+                "On":                           1
+        daphne_joy:
+            group: ADVANCED OPTIONS
+            prompt:      CUSTOM CONTROLLER
+            description: Allows you to set the controller settings in the custom.ini file manually.
             choices:
                 "Off":                          0
                 "On":                           1
@@ -7510,7 +7517,7 @@ tsugaru:
 
 mame:
   features: [padtokeyboard]
-  shared: [videomode, bezel, bezel_stretch, hud, hud_corner, bezel.tattoo, bezel.tattoo_corner, bezel.tattoo_file, bezel.resize_tattoo]
+  shared: [videomode, bezel, bezel_stretch, hud, hud_corner, bezel.tattoo, bezel.tattoo_corner, bezel.tattoo_file, bezel.resize_tattoo, use_guns]
   cfeatures:
         video:
             prompt:      VIDEO MODE
@@ -8835,6 +8842,9 @@ mugen:
             choices:
                 "Off": 0
                 "On":  1
+ikemen:
+  features: [padtokeyboard]
+  shared: [videomode, bezel, bezel_stretch, hud, hud_corner, bezel.tattoo, bezel.tattoo_corner, bezel.tattoo_file, bezel.resize_tattoo]
 
 ruffle:
   features: [padtokeyboard]

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-06 12:45+0200\n"
-"PO-Revision-Date: 2022-10-14 09:34+0200\n"
+"PO-Revision-Date: 2022-11-02 08:42+0100\n"
 "Last-Translator: pedrobarbosa\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -5453,7 +5453,7 @@ msgstr "Konami Justifier"
 #. TRANSLATION: libretro/snes9x
 msgctxt "game_options"
 msgid "M.A.C.S. Rifle"
-msgstr "Rifle M.A.C.S."
+msgstr "Rifle MACS"
 
 #. TRANSLATION: libretro/snes9x
 msgctxt "game_options"
@@ -6593,22 +6593,36 @@ msgstr "HABILITAR RATOLÍ"
 #. TRANSLATION: cemu
 msgctxt "game_options"
 msgid "Enable Cemu's performance overlay."
-msgstr ""
+msgstr "Habilitar el superposat de rendiment de Cemu."
 
 #. TRANSLATION: cemu
 msgctxt "game_options"
 msgid "ENABLE PERFORMANCE OVERLAY"
-msgstr ""
+msgstr "HABILITAR SUPERPOSAT DE RENDIMENT"
 
 #. TRANSLATION: cemu
 msgctxt "game_options"
 msgid "Enable notifications of cache, controller events etc."
-msgstr ""
+msgstr "Habilitar notificacions de memória cau, events de controlador, etc."
 
 #. TRANSLATION: cemu
 msgctxt "game_options"
 msgid "ENABLE NOTIFICATIONS"
+msgstr "HABILITAR NOTIFICACIONS"
+
+#. TRANSLATION: cemu
+msgctxt "game_options"
+msgid ""
+"Enable gamepad view for games that have interaction across two screens. Use "
+"L1+R1 to switch screens."
 msgstr ""
+"Habilita la vista del comandament per a jocs que tenen interacció entre les "
+"2 pantalles. Useu L1+R1 per a intercanviar-les."
+
+#. TRANSLATION: cemu
+msgctxt "game_options"
+msgid "ENABLE GAMEPAD VIEW"
+msgstr "HABILITAR VISTA DEL COMANDAMENT"
 
 #. TRANSLATION: cemu
 msgctxt "game_options"
@@ -6801,6 +6815,18 @@ msgstr ""
 msgctxt "game_options"
 msgid "SDL TEXTUREACCESS STREAMING"
 msgstr "TRANSMISSIÓ D’ACCÈS A LA TEXTURA SDL"
+
+#. TRANSLATION: daphne
+msgctxt "game_options"
+msgid ""
+"Allows you to set the controller settings in the custom.ini file manually."
+msgstr ""
+"Permet establir manualment ajustos de comandaments en l’arxiu custom.ini."
+
+#. TRANSLATION: daphne
+msgctxt "game_options"
+msgid "CUSTOM CONTROLLER"
+msgstr "COMANDAMENT PERSONALITZAT"
 
 #. TRANSLATION: dolphin/uzem
 msgctxt "game_options"

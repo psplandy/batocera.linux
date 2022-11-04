@@ -212,6 +212,9 @@ define BATOCERA_NVIDIA_DRIVER_INSTALL_TARGET_CMDS
 	)
 	$(BATOCERA_NVIDIA_DRIVER_INSTALL_KERNEL_MODULE)
 
+# install nvidia-modprobe, required
+	$(INSTALL) -D -m 0755 $(@D)/nvidia-modprobe $(TARGET_DIR)/usr/bin/nvidia-modprobe
+
 # batocera install files needed by Vulkan
 	$(INSTALL) -D -m 0644 $(@D)/nvidia_layers.json \
 		$(TARGET_DIR)/usr/share/vulkan/implicit_layer.d/nvidia_production_layers.json
@@ -233,14 +236,16 @@ define BATOCERA_NVIDIA_DRIVER_INSTALL_TARGET_CMDS
 endef
 
 define BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86_64
-	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_production_icd.x86_64.json
-        sed -i -e s+'"library_path": "libGLX_nvidia'+'"library_path": "/usr/lib/libGLX_nvidia'+ $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_production_icd.x86_64.json
-	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_production_icd.i686.json
-        sed -i -e s+'"library_path": "libGLX_nvidia'+'"library_path": "/lib32/libGLX_nvidia'+ $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_production_icd.i686.json
+    mkdir -p $(TARGET_DIR)/usr/share/vulkan/nvidia
+	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/nvidia/nvidia_production_icd.x86_64.json
+        sed -i -e s+'"library_path": "libGLX_nvidia'+'"library_path": "/usr/lib/libGLX_nvidia'+ $(TARGET_DIR)/usr/share/vulkan/nvidia/nvidia_production_icd.x86_64.json
+	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/nvidia/nvidia_production_icd.i686.json
+        sed -i -e s+'"library_path": "libGLX_nvidia'+'"library_path": "/lib32/libGLX_nvidia'+ $(TARGET_DIR)/usr/share/vulkan/nvidia/nvidia_production_icd.i686.json
 endef
 
 define BATOCERA_NVIDIA_DRIVER_VULKANJSON_X86
-	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/icd.d/nvidia_production_icd.i686.json
+    mkdir -p $(TARGET_DIR)/usr/share/vulkan/nvidia
+	$(INSTALL) -D -m 0644 $(@D)/nvidia_icd.json $(TARGET_DIR)/usr/share/vulkan/nvidia/nvidia_production_icd.i686.json
 endef
 
 ifeq ($(BR2_x86_64),y)
