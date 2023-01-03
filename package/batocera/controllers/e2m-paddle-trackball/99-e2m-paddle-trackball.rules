@@ -1,1 +1,5 @@
-SUBSYSTEM=="input", ACTION=="add", ENV{ID_SERIAL}=="0ae4_TAITO_USB_Paddle___Trackball_Controller", MODE="0666", ENV{ID_INPUT_JOYSTICK}="0", ENV{ID_INPUT_MOUSE}="1", RUN+="/usr/bin/virtual-e2m-paddle-trackball-add"
+# Taito egret-II paddle and trackball
+SUBSYSTEM=="input", ACTION=="add", ATTRS{name}=="TAITO USB Paddle & Trackball Controller", MODE="0666", ENV{ID_INPUT_JOYSTICK}="1", ENV{ID_INPUT_MOUSE}="1", RUN+="/usr/bin/virtual-e2m-paddle-trackball-add"
+
+# Modified controller with paddle mapped to REL_X instead of REL_WHEEL
+SUBSYSTEM=="input", ACTION=="add", ATTRS{name}=="Egret-II Mini Paddle", MODE="0666", ENV{ID_INPUT_JOYSTICK}="1", ENV{ID_INPUT_MOUSE}="1"

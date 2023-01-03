@@ -18,7 +18,15 @@ then
 	    echo 0 > /sys/class/disp/disp/attr/lcd_para 
 	    echo 1 > /sys/class/lcd/reload_lcd_panel_func 
 	    echo 0 > /sys/class/disp/disp/attr/lcd 
-	    fbset -g 768 1024 768 2048 32
+	    if test "${INTERNALCARD}" = "e2m"
+	    then
+	        # EGRET II Mini
+	        fbset -g 768 1024 768 2048 32
+	    
+	    else
+	        # Astro City Mini
+	        fbset -g 480 800 480 1600 32
+	    fi
 	    echo 1 > /sys/class/disp/disp/attr/lcd
         else
 	        batocera-settings-set display.rotate 0
@@ -28,6 +36,7 @@ then
 		echo 1 > /sys/class/disp/disp/attr/lcd_para 
 		echo 1 > /sys/class/lcd/reload_lcd_panel_func 
 		echo 0 > /sys/class/disp/disp/attr/lcd
+		# HDMI output set to 720p
 		fbset -g 1280 720 1280 1440 32 
 		echo 1 > /sys/class/disp/disp/attr/lcd
         fi
