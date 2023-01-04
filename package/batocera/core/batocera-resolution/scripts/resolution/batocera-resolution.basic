@@ -1,0 +1,63 @@
+#!/bin/sh
+
+FILEMODES="/sys/class/graphics/fb0/modes"
+VIRTUALSIZE=`cat /sys/class/graphics/fb0/virtual_size`
+V_BOARD=`cat /boot/boot/batocera.board`
+HDMISTATUS=`cat /sys/devices/virtual/switch/hdmi/state`
+
+f_usage() {
+        echo "$0 currentMode" >&2
+        echo "$0 currentResolution" >&2
+        echo "$0 setMode" >&2
+        echo "$0 listModes" >&2
+}
+
+if [ $# -eq 0 ]; then
+        f_usage
+        exit 1
+fi
+
+ACTION=$1
+shift
+
+case "${ACTION}" in
+    "supportSystemRotation")
+	exit 1
+    ;;
+    "listModes")
+        echo `test -e "${FILEMODES}" && head -1 "${FILEMODES}" `
+    ;;
+    "setMode")
+	if test "${HDMISTATUS}" = 0
+	then
+            # Internal
+	    if test "${V_BOARD}" = "e2m"
+	    then
+        	fbset -g 768 1024 768 2048 32
+	    else
+        	fbset -g 480 800 480 1600 32
+            fi
+        else
+	    # HDMI
+            fbset -g 720 1280 720 2560 32
+	fi
+    ;;
+    "minTomaxResolution" | "minTomaxResolution-secure")
+    ;;
+    "currentMode"|"currentResolution")
+        # mode can be different from resolution (ie on rpi)
+        CURRENTRES=`test -e "${FILEMODES}" && head -1 "${FILEMODES}" | sed -e s+'^[^:]:\([0-9]*\)x\([0-9]*\)[a-z]*.*$'+'\1x\2'+`
+        if [[ $VIRTUALSIZE == "480,1600" ]]; then
+            echo "800x480"
+        elif [[ $VIRTUALSIZE == "768,2048" ]]; then
+            echo "1024x768"
+        else
+            echo "1280x720"
+        fi
+        ;;
+        *)
+                f_usage
+                >&2 echo "error: invalid command ${ACTION}"
+                exit 1
+esac
+exit 0

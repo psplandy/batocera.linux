@@ -2,18 +2,32 @@
 ### EmulationStation
 - volume for libretro cores can be changed per-game from es, may be extended to other emulators in future
 - brightness can go down to 1% (instead of 5%)
-- keep power pressed 3s to et the shutdown menu
+- holding power button 3s will show the shutdown menu
+- new enhanced UI for themes management (from Content Downloader)
+- navigation with light guns now possible
 ### Added
-- alsa ucm2 to x86 builds for soundcard compatibility
-- Vita3k - PlayStation Vita emulator (October 25th build)
+- alsa ucm2 to x86 builds for soundcard compatibility - v1.2.8
+- sound open firmware for expanded soundcard support - v2.2.3
+	- manaual config is necessary
+- Vita3k - PlayStation Vita emulator (Nov 28th build)
 - WASM4 - WebAssembly fantasy console (x86_64)
+- Ikemen-Go fighting engine (x86_64)
 - automatic switch when a new display is plugged or unplugged (on es only for plugging)
-- Intel VAAPI drivers
-- Light Gun in-game pre-calibration for arcade (atomiswave, naomi, MAME, lr-mame, lr-mame2003-plus, model2, model3)
+- Intel VAAPI drivers for hardware video playback acceleration
+- Light gun in-game pre-calibration for arcade (atomiswave, naomi, MAME, lr-mame, lr-mame2003-plus, model2, model3) and Wii
 - Mesa hadware codecs for supported Intel & AMD cards
-- Zink for OpenGL to Vulkan
+- Zink for OpenGL to Vulkan (advanced script use only)
 - patch to allow Switch clone controllers to work in some cases
+- patch to allow Sony Playstation clone controllers to work in some cases
 - Xenia a Microsoft Xbox 360 emulator (v1.0.2775) - requires x86_64+Vulkan card & Wine (Note: Limited compatibility)
+	- xenia-canary release is also included - build at f55defc
+	- Xbox 360 digital titles can now be seen via .xbox360 playlists in ES
+- Light gun support for Wii (up to 4 players)
+- Light gun support for PS3 (up to 2 players)
+- initial Intel A770 GPU support
+- Enabled libretro-yabasanshiro for platform RK3399
+- force feedback for Nintendo controllers (requires linux kernel 5.16 or later)
+- Added wayland + sway support for single board computer (SBC)
 ### Changed
 - move to pipewire wireplumber audio
 - bluetooth modes : automatic and manual (via a list)
@@ -21,28 +35,36 @@
     - *.ram to *.bkr
     - *-ext512K.ram to *.bcr
     - You can continue to use the old save format by entering the following line into batocera.conf: saturn.kronos_use_beetle_saves = disabled
-- cemu to native linux version (v2.0.10)
+- cemu to native linux version (v2.0-22)
+	- cemu fixes for controllers
+- new Apple 2 MAME options - joystick & alternate models, (LR-MAME & Standalone), hard drive images (Standalone)
+- Playstation DS4 controllers now use the hid-playstation driver
+- Moving some SBC's to the Wayland display server protocol - v1.29
+	- Using Sway as the Wayland compositor - v1.7
+	- RPi4 will also use XWayaland - v22.1.7
+		- Removed 'redream' emulator which fails under wayland
 ### Updated
 - pcsx2 to v1.7.3292
-- alsa to 1.2.7.2
+- alsa to 1.2.8
 - ruffle to August 19th release
 - lightspark to August 18th release
 - btop to 1.2.8
 - ryzenadj to 0.11.1
 - pipewire to 0.3.57
 - rust to 1.63
-- bluez to 5.65
+- bluez to 5.66
 - xemu to 0.7.67
 - citra to nightly-1784
 - dolphin to 5.0-17316
-- rpcs3 to v0.0.24
-- flycast emulators to v2.0
+- rpcs3 to v0.0.25
+- flycast emulators to Dec 5, 2022 build
 - dosbox to v0.78.1
 - dosbox-x to v0.84.3
-- PPSSPP & lr-PPSSPP to v1.13.2
-- nvidia production driver to 520.56.06
-- nvidia legacy driver to 470.141.03
-- nvidia legacy 390 driver to 390.154
+- dosbox-staging to v0.79.1
+- PPSSPP & lr-PPSSPP to v1.14
+- nvidia production driver to 525.60.11
+- nvidia legacy driver to 470.161.03
+- nvidia legacy 390 driver to 390.157
 - openMSX to v18
 - moonlight embedded to v2.5.2
 - groovy mame to 0.247
@@ -50,33 +72,37 @@
 - fsuae to July 30 build
 - scummvm to v2.6.1
 - simcoupe to v1.2.11
-- supermodel to Aug 19 2022 build
+- supermodel to Nov 14, 2022 build
 - tsugaru to v20220702
 - vice to 3.6.1
-- linux kernel for x86_64 to 6.0.6
+- linux kernel for x86_64 to 6.1 lts
 - daphne emulator hypseus-singe to v2.10.1 (now uses SDL controller)
 - amiberry to v5.4
 - mame to v0.248
 - switchres to sep 25th 2022 build
 - lr-mame to v0.248
-- retroarch to v1.12.0 [Changelog](https://github.com/libretro/RetroArch/blob/master/CHANGES.md#1120)
+- retroarch to v1.14.0
 - libretro cores synced with retroarch v1.11.1 [#7245](https://github.com/batocera-linux/batocera.linux/pull/7245)
 - libretro-core-info to Oct 04 2022 build
-- retroarch-assets to Aug 06 2022 build
+- retroarch-assets to Oct 24 2022 build
 - common-shaders to Apr 16 2022 build
 - glsl-shaders to Sep 23 2022 build
-- alllinuxfirmwares to 20221012
+- alllinuxfirmwares to 20221214
 - mupen64plus-video-rice to Sep 30, 2022
-- mupen64plus-video-glide64mk2 to Sep 30, 2022
+- mupen64plus-video-glide64mk2 to Nov 17, 2022
 - mupen64plus-ui-console to Oct 01, 2022
 - mupen64plus-rsp-hle to Sep 30, 2022
 - mupen64plus-input-sdl to Sep 30, 2022
-- mupen64plus-audio-sdl to Oct 01, 2022
-- mupen64plus-core to Oct 01, 2022
-- mesa3d to 22.2.2 [Changelog](https://docs.mesa3d.org/relnotes/22.2.2.html)
+- mupen64plus-audio-sdl to Nov 30, 2022
+- mupen64plus-core to Dec 3, 2022
 - moonlight embedded to 2.5.3
-- proton to v2.7
+- wine-proton to 7.0-5
+	- vkd3d-proton to v2.8
 - vulkan stack to v1.3.231
+- lr-yabasanshiro to 28th sept build
+- lr-flycast emulators to Dec 5, 2022 build
+- bezels updated for many systems
+- xpandneo to v0.9.5
 ### Fixed
 - lr-mame save state file names
 - slow rpcs3 initial ppu compilation times
@@ -87,15 +113,25 @@
 - mesa vaapi for additional cards
 - long start times with vulkan in some cases
 - Sony touchpad for Mame
+- od-commander fixed for several screen resolutions
+- disabling rumble for some libretro emulators/controllers
+- Xbox S|X controllers with the RPi4
 ### Dev  
-- buildroot upgrade to 2022.08.1
-- raspberrypi upgrade linux to 1.20221028 (5.15.74)
+- buildroot upgrade to 2022.11.x
+- odroidxu4 upgrade kernel to 6.1
 - rpi1 image renamed to bcm2835
 - rpi2 image renamed to bcm2836
 - rpi3 image renamed to bcm2837
 - rpi4 image renamed to bcm2711
 - ffmpeg updated to 5.1.2
 - libva updated to 2.16
+- rtl8192eu update to Nov 5, 2022
+- rtl8723ds update to Nov 4, 2022
+- rtl8812au update to Nov 16, 2022
+- rtl8188fu update to Nov 1, 2022
+- mesa3d update to 22.3.2
+- uinput-joystick update to Feb 11, 2022
+- firmware-orangepi update to Nov 24, 2022
 
 # 2022/09/20 - batocera.linux 35 - Monarch Butterfly
 * add: gun support in emulationstation
@@ -1264,7 +1300,7 @@ Note: this version is the first one with real wiimotes working on x86_64 archite
 Recalbox.remix is now mainly 3 files on the USB key/SD card (SD CARD CONTENT - grub) :
 - /boot/linux (os system, ~5/10mb)
 - /boot/recalbox (root filesystem, ~350mb)
-- /boot/initrd.gz (technical file needed to start the recalbox file from linux ~500kb)
+- /boot/initrd.lz4 (technical file needed to start the recalbox file from linux ~500kb)
 
 # 2016/11/14
 * play Wii with real wiimotes

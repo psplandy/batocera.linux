@@ -3,8 +3,7 @@
 # cemu
 #
 ################################################################################
-# Version: v2.0-13 - Commits on Nov 4, 2022
-CEMU_VERSION = a40b226e003b7ad6a21612f6a1a72ba09f102faa
+CEMU_VERSION = v2.0-22
 CEMU_SITE = https://github.com/cemu-project/Cemu
 CEMU_LICENSE = GPLv2
 CEMU_SITE_METHOD=git
@@ -17,6 +16,13 @@ CEMU_SUPPORTS_IN_SOURCE_BUILD = NO
 CEMU_CONF_OPTS += -DCMAKE_BUILD_TYPE=Release -Wno-dev -DBUILD_SHARED_LIBS=OFF
 CEMU_CONF_OPTS += -DENABLE_DISCORD_RPC=OFF -DENABLE_VCPKG=OFF -DPORTABLE=OFF
 CEMU_CONF_OPTS += -DCMAKE_CXX_FLAGS="$(TARGET_CXXFLAGS) -I$(STAGING_DIR)/usr/include/glslang"
+
+ifeq ($(BR2_PACKAGE_WAYLAND),y)
+    CEMU_CONF_OPTS += -DENABLE_WAYLAND=ON
+    CEMU_DEPENDENCIES += wayland wayland-protocols
+else
+    CEMU_CONF_OPTS += -DENABLE_WAYLAND=OFF
+endif
 
 define CEMU_INSTALL_TARGET_CMDS
 	mkdir -p $(TARGET_DIR)/usr/bin/cemu/

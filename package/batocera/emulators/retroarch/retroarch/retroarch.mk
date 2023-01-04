@@ -3,8 +3,8 @@
 # retroarch
 #
 ################################################################################
-# Version: Commits on Oct 25, 2022 (v1.12.0)
-RETROARCH_VERSION = b41f6b288569d2e47cd69587f5d6c14e8e47e05c
+
+RETROARCH_VERSION = v1.14.0
 RETROARCH_SITE = $(call github,libretro,RetroArch,$(RETROARCH_VERSION))
 RETROARCH_LICENSE = GPLv3+
 RETROARCH_DEPENDENCIES = host-pkgconf dejavu retroarch-assets flac
@@ -120,7 +120,7 @@ ifeq ($(BR2_PACKAGE_ROCKCHIP_RGA),y)
 endif
 
 ifeq ($(BR2_PACKAGE_HAS_LIBGL),y)
-  ifneq ($(BR2_PACKAGE_BATOCERA_SBC_XORG)$(BR2_PACKAGE_XWAYLAND),y)
+  ifneq ($(BR2_PACKAGE_XWAYLAND),y)
     RETROARCH_CONF_OPTS += --enable-opengl --disable-opengles --disable-opengles3
     RETROARCH_DEPENDENCIES += libgl
   endif
@@ -141,7 +141,7 @@ endif
 
 ifeq ($(BR2_PACKAGE_VULKAN_LOADER)$(BR2_PACKAGE_VULKAN_HEADERS),yy)
     RETROARCH_CONF_OPTS += --enable-vulkan
-    RETROARCH_DEPENDENCIES += vulkan-headers vulkan-loader
+    RETROARCH_DEPENDENCIES += vulkan-headers vulkan-loader slang-shaders
 endif
 
 define RETROARCH_CONFIGURE_CMDS

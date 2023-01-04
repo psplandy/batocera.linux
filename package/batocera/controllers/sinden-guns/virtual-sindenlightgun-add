@@ -37,7 +37,7 @@ then
     # down:  button_6 / down
     # left:  button_7 / left
     # right: button_8 / right
-    nohup evsieve --input "${DEV1}" "${DEVNAME}" persist=exit --map key:1 btn:1 --map key:2 btn:2 --output name="Sinden lightgun" >/dev/null 2>"/var/log/virtual-sindenlightgun-devices.${USBPATHHASH}.log" &
+    nohup evsieve --input "${DEV1}" "${DEVNAME}" persist=exit --map key:1 btn:1 --map key:2 btn:2 --map key:up btn:5 --map key:down btn:6 --map key:left btn:7 --map key:right btn:8 --output name="Sinden lightgun" >/dev/null 2>"/var/log/virtual-sindenlightgun-devices.${USBPATHHASH}.log" &
     echo $! > "/var/run/virtual-sindenlightgun-devices.${USBPATHHASH}.pid"
 
     # ttyACM
@@ -108,7 +108,7 @@ then
 
 	sed -i -e s+'\(key="SerialPortWrite"[ ]*value="\)[^"]*"'+'\1'${ACMDEV}'"'+ "${CONFIGFILE}" || cleanAndExit 1
 	rm -f "/var/run/sinden/p${USBPATHHASH}/lockfile"
-	(cd "/var/run/sinden/p${USBPATHHASH}" && PATH=/bin:/sbin:/usr/bin:/usr/sbin mono-service -l:"/var/run/sinden/p${USBPATHHASH}/lockfile" "./LightgunMono-${USBPATHHASH}.exe" &)
+	PATH=/bin:/sbin:/usr/bin:/usr/sbin nohup mono-service -l:"/var/run/sinden/p${USBPATHHASH}/lockfile" -d:"/var/run/sinden/p${USBPATHHASH}" --no-daemon "./LightgunMono-${USBPATHHASH}.exe" > "/var/run/sinden/p${USBPATHHASH}/sinden-${USBPATHHASH}.log" &
     fi
     
 else

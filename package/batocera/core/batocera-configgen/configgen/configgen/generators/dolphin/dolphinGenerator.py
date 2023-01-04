@@ -8,6 +8,7 @@ from os import environ
 import configparser
 from . import dolphinControllers
 from . import dolphinSYSCONF
+import controllersConfig
 
 class DolphinGenerator(Generator):
 
@@ -20,7 +21,7 @@ class DolphinGenerator(Generator):
             os.makedirs(batoceraFiles.dolphinData + "/StateSaves")
         
         # Generate the controller config(s)
-        dolphinControllers.generateControllerConfig(system, playersControllers, rom)
+        dolphinControllers.generateControllerConfig(system, playersControllers, rom, guns)
 
         ## [ dolphin.ini ] ##
         dolphinSettings = configparser.ConfigParser(interpolation=None)
@@ -40,6 +41,8 @@ class DolphinGenerator(Generator):
             dolphinSettings.add_section("Analytics")
         if not dolphinSettings.has_section("Display"):
             dolphinSettings.add_section("Display")
+        if not dolphinSettings.has_section("GBA"):
+            dolphinSettings.add_section("GBA")
 
         # Define default games path
         if "ISOPaths" not in dolphinSettings["General"]:
@@ -121,6 +124,12 @@ class DolphinGenerator(Generator):
             else:
                 dolphinSettings.set("Core", "SIDevice" + str(i - 1), "6")
 
+        # HiResTextures for guns part 1/2 (see below the part 2)
+        if system.isOptSet('use_guns') and system.getOptBoolean('use_guns') and len(guns) > 0 and ((system.isOptSet('dolphin-lightgun-hide-crosshair') == False and controllersConfig.gunsNeedCrosses(guns) == False) or system.getOptBoolean('dolphin-lightgun-hide-crosshair' == True)):
+            dolphinSettings.set("General", "CustomTexturesPath", "/usr/share/DolphinCrosshairsPack")
+        else:
+            dolphinSettings.remove_option("General", "CustomTexturesPath")
+
         # Change discs automatically
         dolphinSettings.set("Core", "AutoDiscChange", "True")
 
@@ -164,6 +173,12 @@ class DolphinGenerator(Generator):
         else:
             dolphinGFXSettings.set("Settings", "HiresTextures",      "False")
             dolphinGFXSettings.set("Settings", "CacheHiresTextures", "False")
+
+        # HiResTextures for guns part 2/2 (see upper part1)
+        if system.isOptSet('use_guns') and system.getOptBoolean('use_guns') and len(guns) > 0 and (system.isOptSet('dolphin-lightgun-hide-crosshair') == False or system.getOptBoolean('dolphin-lightgun-hide-crosshair' == True)):
+            # erase what can be set by the option hires_textures
+            dolphinGFXSettings.set("Settings", "HiresTextures",      "True")
+            dolphinGFXSettings.set("Settings", "CacheHiresTextures", "True")
 
         # Widescreen Hack
         if system.isOptSet('widescreen_hack') and system.getOptBoolean('widescreen_hack'):
